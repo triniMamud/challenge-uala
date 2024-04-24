@@ -1,12 +1,13 @@
 package com.example.demo.java.user.service;
 
-import com.example.demo.java.exception.ItemNotFoundException;
+import com.example.demo.java.exception.exceptions.ItemNotFoundException;
 import com.example.demo.java.user.controller.request.CreateUserRequest;
 import com.example.demo.java.user.entity.User;
 import com.example.demo.java.user.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,11 +32,13 @@ public class UserService {
 
     public void followUser(String id, String userId) throws ItemNotFoundException {
         if(this.findById(userId).isEmpty()) {
-            throw new ItemNotFoundException(String.format("The user %s doesn't exist.", userId));
+            throw new ItemNotFoundException(String.format("The followingUser %s doesn't exist.", userId));
         }
 
-        var user = this.get(id);
-        user.getFollowedUserIds().add(userId);
+        var followingUser = this.get(id);
+        followingUser.getFollowedUserIds().add(userId);
+
+        userRepository.save(followingUser);
     }
 
 }

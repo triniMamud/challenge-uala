@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: demo
+  data:
+    mongodb:
+      uri: mongodb+srv://trini:vySxAR3JtD1GUi3G@cluster0.bfouopp.mongodb.net/uala
+      auto-index-creation: true
